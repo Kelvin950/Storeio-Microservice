@@ -6,12 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.ts",
-    "build": "tsc index.ts"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@kelvin9502/shared": "^1.0.2",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.3",
     "@types/express": "^4.17.17",
@@ -29,16 +30,17 @@
     "nodemon": "^2.0.20",
     "ts-node": "^10.9.1"
   },
-  "_moduleAlisases":{
-    "@roots":"." ,
-     "@models/*" : "Models/*",
-      "@middlewares/*": "middlewares/*",
-      "@utils/*": "utils/*",
-      "@controller/*": "controllers/*",
-      "@route/*": "routes/*"
-  }
-  ,
-  "_moduleDirectories": ["node_modules_custom"],
+  "_moduleAlisases": {
+    "@roots": ".",
+    "@models/*": "Models/*",
+    "@middlewares/*": "middlewares/*",
+    "@utils/*": "utils/*",
+    "@controller/*": "controllers/*",
+    "@route/*": "routes/*"
+  },
+  "_moduleDirectories": [
+    "node_modules_custom"
+  ],
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.1",
     "ts-node-dev": "^2.0.0",
