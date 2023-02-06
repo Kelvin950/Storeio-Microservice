@@ -1,7 +1,7 @@
 import express from 'express';
 import "express-async-errors";
 import cookie from 'cookie-parser';
-import {errorHandler} from '@middlewares/errorHanlder';
+import {errorHandler} from '@kelvin9502/shared'
 import 'dotenv/config' ; 
 import helmet from 'helmet';
 import {userRoutes} from "@route/userRoutes"

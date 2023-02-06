@@ -1,6 +1,6 @@
 import {Request ,Response} from 'express';
 import User from '@models/User';
-import BadInputError from '@middlewares/BadInputError';
+import {BadInputError} from "@kelvin9502/shared";
 import jwt from 'jsonwebtoken';
 
 export const createUser = async (req:Request , res:Response)=>{
