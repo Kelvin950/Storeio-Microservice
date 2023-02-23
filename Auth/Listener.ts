@@ -19,7 +19,7 @@ export class Listener  extends BaseListener<BaseEvents>{
      OnMessage(msg: Message , channel: Channel): void {
         
           
-       console.log(msg);
+       console.log(msg.content.toString());
        channel.ack(msg);
 
     }
