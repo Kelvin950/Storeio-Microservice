@@ -2,7 +2,8 @@ import {Request ,Response} from 'express';
 import User from '@models/User';
 import {BadInputError} from "@kelvin9502/shared";
 import jwt from 'jsonwebtoken';
-
+import  {Publisher} from '../../Publisher';
+import {AMQP} from '../../amqplibWrapper'
 export const createUser = async (req:Request , res:Response)=>{
  
     
@@ -21,7 +22,13 @@ const user = await  User.create({name , password});
 
  await user.save(); 
 
+
+  new Publisher(AMQP.channel).Publish({
+    id:user.id ,
+    name:user.name
+  })
   
+      
  const token =  jwt.sign( {id:user.id , email:user.name}, process.env.JWT_SECRET! ,{expiresIn:"1hr"} ); 
 
  res.cookie("me" , name , {

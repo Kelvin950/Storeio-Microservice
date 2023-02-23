@@ -1,6 +1,7 @@
 import app from "./src/app";
 import mongoose from "mongoose";
-import  {AMQP} from './amqplibWrapper'
+import  {AMQP} from './amqplibWrapper' ;
+import  {Listener} from './Listener'
 const PORT = process.env.PORT || 3000;
 
 (async () => {
@@ -23,7 +24,8 @@ const PORT = process.env.PORT || 3000;
     const connect = await mongoose.connect(process.env.MONGO_URI);
     console.log(connect.connection.host);
      
-    
+
+    await new Listener(AMQP.channel).listen();
 
     app.listen(PORT, () => {
       console.log("SERVER OPENED ");
