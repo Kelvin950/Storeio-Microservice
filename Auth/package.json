@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@kelvin9502/shared": "^1.0.5",
+    "@kelvin9502/shared": "^1.0.9",
     "@types/amqplib": "^0.10.1",
     "@types/bcryptjs": "^2.4.2",
     "@types/cookie-parser": "^1.4.3",
