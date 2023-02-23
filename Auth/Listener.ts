@@ -1,5 +1,5 @@
 import { BaseListener, RoutingKeys } from "@kelvin9502/shared";
-import { Channel } from "amqplib";
+import { Channel , Message } from "amqplib";
 
 interface BaseEvents {
   routingKey: RoutingKeys.auth;
@@ -16,7 +16,7 @@ export class Listener  extends BaseListener<BaseEvents>{
    routingKey: RoutingKeys.auth =  RoutingKeys.auth;
 
 
-     OnMessage(msg: { id: string; name: string; }, channel: Channel): void {
+     OnMessage(msg: Message , channel: Channel): void {
         
           
        console.log(msg);
