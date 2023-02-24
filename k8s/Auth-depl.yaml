@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: letsgo21/k8sauth
+        image: letsgo21/k8sauth:latest
         resources:
           limits:
             memory: "128Mi"
