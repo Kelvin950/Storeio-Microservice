@@ -20,7 +20,9 @@ spec:
             secretKeyRef:
               name: storemongouri
               key: mongo_uri
-
+        - name: AMQP_URI
+          value: amqp://rabbitmq-service.default:5672
+        
 
 ---
 
