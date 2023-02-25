@@ -1,5 +1,6 @@
 import express  ,  {Request , Response}from 'express';
-import  {errorHandler} from '@kelvin9502/shared'
+import  {errorHandler} from '@kelvin9502/shared';
+
 const app =  express();
 
 
@@ -11,7 +12,7 @@ app.use("/" ,  (req:Request,res:Response)=>{
 
     res.send("Hello world")
     
-})
+}) ;
 
 
 
