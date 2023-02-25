@@ -30,8 +30,12 @@ class AmqplibWrapper{
     async  Connect(url:string){
 
         
-    this._client = await connect(url); 
-     this._channel =  await this._client.createChannel();
+    try {
+      this._client = await connect(url);
+      this._channel = await this._client.createChannel();
+    } catch (error) {
+       throw error;
+    }
         
          
 

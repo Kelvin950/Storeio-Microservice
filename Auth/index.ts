@@ -4,13 +4,16 @@ import  {AMQP} from './amqplibWrapper' ;
 import  {Listener} from './Listener'
 const PORT = process.env.PORT || 3000;
 
-(async () => {
-  try {
-    if (!process.env.SECRET) throw new Error();
-    if (!process.env.MONGO_URI) throw new Error();
-        if (!process.env.JWT_SECRET) throw new Error();
 
-         await AMQP.Connect("amqp://localhost");
+(async () => {
+
+  try {
+    if (!process.env.SECRET) throw new Error("no cookie secret ");
+    if (!process.env.MONGO_URI) throw new Error("no mongo uri");
+        if (!process.env.JWT_SECRET) throw new Error("no jwt secret");
+        if(!process.env.AMQP_URI)throw new Error("no amqp uri")
+
+         await AMQP.Connect(process.env.AMQP_URI);
 
          process.on("SIGINT" , async()=>{
             await AMQP.client.close()

@@ -14,12 +14,25 @@ spec:
     spec:
       containers:
       - name: auth
-        image: letsgo21/k8sauth:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        
+        image: letsgo21/authe:latest
+        env: 
+        -  name: SECRET
+           valueFrom:
+            secretKeyRef:
+              name: secret
+              key: secret
+        -  name: MONGO_URI
+           valueFrom:
+            secretKeyRef:
+              name: mongouri
+              key: mongo_uri
+        -  name: JWT_SECRET 
+           valueFrom:
+            secretKeyRef:
+              name: jwt
+              key: jwt_key
+        -  name: AMQP_URI 
+           value: amqp://rabbitmq-service.default:5672
        
 ---
 

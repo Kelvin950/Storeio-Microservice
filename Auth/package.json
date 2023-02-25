@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.ts",
+    "start": "ts-node index.ts",
     "clean": "del ./build/*",
     "postbuild": "ef-tspm" ,
     "run": "nodemon ./build/index.js",
@@ -15,7 +15,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ef-carbon/tspm": "^2.2.5",
+   
     "@kelvin9502/shared": "^1.0.10",
     "@types/amqplib": "^0.10.1",
     "@types/bcryptjs": "^2.4.2",
