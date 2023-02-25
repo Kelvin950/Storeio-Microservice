@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: store-depl
+spec:
+  selector:
+    matchLabels:
+      app: store
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      containers:
+      - name: store
+        image: letsgo21/store:latest
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: storemongouri
+              key: mongo_uri
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: store-service
+spec:
+  selector:
+    app: store
+  ports:
+  - port: 3000
+    targetPort: 3000
