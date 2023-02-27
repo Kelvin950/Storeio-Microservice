@@ -4,6 +4,7 @@ import  {AMQP} from './amqplibWrapper' ;
 import  {Listener} from './Listener'
 const PORT = process.env.PORT || 3000;
 
+console.log("dr");
 
 (async () => {
 

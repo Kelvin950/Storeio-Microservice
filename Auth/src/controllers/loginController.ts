@@ -9,16 +9,23 @@ import {AMQP} from '../../amqplibWrapper'
 export const isAuth = async(req:Request , res:Response)=>{
 
        
-  const {refreshToken} = req.cookies ;
+  const {refreshToken} = req.signedCookies ;
 
+  console.log(req.signedCookies);
   if(!refreshToken){
 
    throw new AuthError("You are not authenticated" , 403);
   }
 
 
+  let payload:Payload ;
    
-   const payload =   jwt.verify(refreshToken , process.env.JWT_KEY!) as Payload; 
+try {
+   payload = jwt.verify(refreshToken, process.env.JWT_SECRET!) as Payload; 
+} catch (error) {
+   
+  throw new AuthError("You are not authenticated", 403)
+}
 
         
 
@@ -34,7 +41,7 @@ export const isAuth = async(req:Request , res:Response)=>{
 
  
 
- let token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_KEY!, { expiresIn: "1hr" }); 
+ let token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_SECRET!, { expiresIn: "1hr" }); 
 
   res.status(200).send({success:true , data:{
     token
@@ -47,7 +54,7 @@ export const isAuth = async(req:Request , res:Response)=>{
 
 export const createUser = async (req:Request , res:Response)=>{
  
-    
+    console.log(req.headers["cookie"])
 const {name ,password} = req.body ; 
 
 if(name === ''|| password ==''){

@@ -10,17 +10,11 @@ spec:
     - host: store.io
       http:
         paths:
-          - path: /stores/?(.*)
-            pathType: Prefix
-            backend:
-              service:
-                name: store-service
-                port:
-                  number: 3000
-          - path: /auth/?(.*)
+          - path: /api/users/?(.*)
             pathType: Prefix
             backend:
               service:
                 name: auth-service
                 port:
                   number: 3000
+          

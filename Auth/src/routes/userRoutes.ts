@@ -1,12 +1,12 @@
 import express from 'express';
-import {createUser} from '@controller/loginController'
+import {createUser,isAuth} from '@controller/loginController';
+
 const Route = express.Router() ; 
 
-Route.route("/auth/refreshToken")
-.get() ;
+Route.get("/api/users/refreshToken" , isAuth)
 
 
-Route.route("/auth/create")
+Route.route("/api/users/create")
 .post(createUser); 
 
 
