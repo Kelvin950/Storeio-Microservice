@@ -1,9 +1,50 @@
 import {Request ,Response} from 'express';
 import User from '@models/User';
-import {BadInputError} from "@kelvin9502/shared";
+import {BadInputError , AuthError , Payload} from "@kelvin9502/shared";
 import jwt from 'jsonwebtoken';
 import  {Publisher} from '../../Publisher';
+
 import {AMQP} from '../../amqplibWrapper'
+
+export const isAuth = async(req:Request , res:Response)=>{
+
+       
+  const {refreshToken} = req.cookies ;
+
+  if(!refreshToken){
+
+   throw new AuthError("You are not authenticated" , 403);
+  }
+
+
+   
+   const payload =   jwt.verify(refreshToken , process.env.JWT_KEY!) as Payload; 
+
+        
+
+  
+
+ 
+   const user = await User.findById(payload.id);
+
+   if(!user){
+    
+   throw new AuthError("User not found", 401);
+   }
+
+ 
+
+ let token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_KEY!, { expiresIn: "1hr" }); 
+
+  res.status(200).send({success:true , data:{
+    token
+  }});
+
+
+   
+
+}
+
 export const createUser = async (req:Request , res:Response)=>{
  
     
