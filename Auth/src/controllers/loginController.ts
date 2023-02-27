@@ -29,14 +29,16 @@ const user = await  User.create({name , password});
   })
   
       
- const token =  jwt.sign( {id:user.id , email:user.name}, process.env.JWT_SECRET! ,{expiresIn:"1hr"} ); 
+ const refreshtoken =  jwt.sign( {id:user.id , email:user.name}, process.env.JWT_SECRET! ,{expiresIn:"7d"} ); 
 
- res.cookie("me" , name , {
+ const accessToken  = jwt.sign({id:user.id , email:user.name}  , process.env.JWT_SECRET! , {expiresIn:"1hr"});
+
+ res.cookie("refreshToken" , refreshtoken , {
    httpOnly:true ,signed:true 
  }) ;
  res.status(200).send({
     success:true , 
-    data:{user  , token}
+    data:{user  , accessToken}
  });
  
 
