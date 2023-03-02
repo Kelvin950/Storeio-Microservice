@@ -1,9 +1,11 @@
 import express from 'express';
+import  {isAuth} from '@kelvin9502/shared' ;
+import { createStore } from '@controller/index';
 const Router = express.Router();
 
 
 Router.route("/api/store/create")
-.post()
+.post(isAuth ,createStore)
 
 
 

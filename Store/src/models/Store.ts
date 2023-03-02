@@ -11,7 +11,12 @@ const storeSchema = new Schema<Istore>({
   orders:[{type:Schema.Types.ObjectId , ref:"Orders"}]
 
 } , {
-    timestamps:true
+    timestamps:true ,toJSON:{
+        transform(doc, ret, options) {
+             ret.id =  ret._id ;
+             delete ret._id 
+        },
+    }
 }); 
 
 

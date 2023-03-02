@@ -1,4 +1,5 @@
 import express  ,  {Request , Response}from 'express';
+import  "express-async-errors"
 import  {errorHandler} from '@kelvin9502/shared';
 
 const app =  express();
