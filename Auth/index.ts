@@ -29,7 +29,7 @@ console.log("dr");
     console.log(connect.connection.host);
      
 
-    await new Listener(AMQP.channel).listen();
+    // await new Listener(AMQP.channel).listen();
 
     app.listen(PORT, () => {
       console.log("SERVER OPENED ");

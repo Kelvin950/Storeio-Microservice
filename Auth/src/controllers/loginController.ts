@@ -41,10 +41,10 @@ try {
 
  
 
- let token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_SECRET!, { expiresIn: "1hr" }); 
+ let access_token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_SECRET!, { expiresIn: "1hr" }); 
 
   res.status(200).send({success:true , data:{
-    token
+    access_token
   }});
 
 
@@ -71,11 +71,7 @@ const user = await  User.create({name , password});
  await user.save(); 
 
 
-  new Publisher(AMQP.channel).Publish({
-    id:user.id ,
-    name:user.name
-  })
-  
+ 
       
  const refreshtoken =  jwt.sign( {id:user.id , email:user.name}, process.env.JWT_SECRET! ,{expiresIn:"7d"} ); 
 
