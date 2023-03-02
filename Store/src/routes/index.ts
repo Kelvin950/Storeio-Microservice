@@ -4,7 +4,7 @@ import { createStore } from '@controller/index';
 const Router = express.Router();
 
 
-Router.route("/api/store/create")
+Router.route("/api/stores/create")
 .post(isAuth ,createStore)
 
 

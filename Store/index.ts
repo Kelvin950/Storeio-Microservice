@@ -13,6 +13,11 @@ import "dotenv/config";
         throw new Error("failed to connect to mongoinstance");
 }
 
+
+ if(!process.env.JWT_SECRET){
+           throw new Error("NO JWT secret provided");
+}
+ 
    
 const connect =  await mongoose.connect(process.env.MONGO_URI);
      console.log(connect.connection.host);
