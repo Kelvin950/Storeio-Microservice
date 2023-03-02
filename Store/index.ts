@@ -1,5 +1,6 @@
 import {app} from './src/app';
 import  mongoose from 'mongoose';
+import {AmqplibWrapper} from './AMQPwrapper' ;
 const PORT =  process.env.PORT || 3000;
 import "dotenv/config";
 (async()=>{
@@ -18,11 +19,29 @@ import "dotenv/config";
            throw new Error("NO JWT secret provided");
 }
  
+if(!process.env.AMQP_URI) throw new Error("NO amqp uri  provided");
+
+ 
+
+
    
 const connect =  await mongoose.connect(process.env.MONGO_URI);
      console.log(connect.connection.host);
     
      
+    await AmqplibWrapper.Connect(process.env.AMQP_URI!) 
+
+
+    process.on("SIGTERM" ,async()=>{
+      await AmqplibWrapper.client.close()
+    } )
+
+    process.on("SIGINT" ,async () => {
+        await AmqplibWrapper.client.close();
+    })
+
+      
+
      app.listen(PORT , ()=>{
         console.log("port opened");
      })

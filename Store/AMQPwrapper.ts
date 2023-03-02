@@ -26,7 +26,7 @@ get channel(){
 }
 
  
-  async connect(url:string){
+  async Connect(url:string){
      
     this._client = await connect(url); 
      

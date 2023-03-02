@@ -22,8 +22,11 @@ spec:
               key: mongo_uri
         - name: AMQP_URI
           value: amqp://rabbitmq-service.default:5672
-        
-
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: jwt
+              key: jwt_key
 ---
 
 apiVersion: v1
