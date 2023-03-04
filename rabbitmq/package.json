@@ -10,7 +10,14 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^29.4.3"
+    "@babel/core": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.0",
+    "@types/jest": "^29.4.0",
+    "babel-jest": "^29.4.3",
+    "jest": "^29.4.3",
+    "ts-jest": "^29.0.5",
+    "ts-node": "^10.9.1"
   },
   "dependencies": {
     "@kelvin9502/shared": "^1.0.20",
