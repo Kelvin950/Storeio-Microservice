@@ -1,7 +1,7 @@
 import {app} from './src/app';
 import  mongoose from 'mongoose';
 import {AmqplibWrapper} from './AMQPwrapper' ;
-import {StoreCreatedListener} from '@events/listeners/StoreCreatedListener'
+import {productCreatedListener} from '@events/listeners/productCreatedListener'
 const PORT =  process.env.PORT || 3000;
 
 import "dotenv/config";
@@ -43,7 +43,7 @@ const connect =  await mongoose.connect(process.env.MONGO_URI);
     })
 
     // await new StoreCreatedListener(AmqplibWrapper.channel).listen()   
-
+  await new productCreatedListener(AmqplibWrapper.channel).listen();
      app.listen(PORT , ()=>{
         console.log("port opened");
      })

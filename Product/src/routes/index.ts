@@ -4,7 +4,7 @@ import  {create} from '@controller/index'
 const Router =  express.Router(); 
  
 
-Router.route("/api/products/create")
+Router.route("/api/products/create/:storeId")
 .post(isAuth ,create ) ;
 
 

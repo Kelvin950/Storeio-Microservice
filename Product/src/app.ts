@@ -4,7 +4,7 @@ import {errorHandler} from '@kelvin9502/shared' ;
 import {productRouter} from '@routes/index'
 const app = express() ;
 
-     
+app.use(express.json());
       
 
 app.get("/api/products/" ,(req:Request,res:Response)=>{
