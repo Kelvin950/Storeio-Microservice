@@ -5,6 +5,7 @@ import { Message, Channel } from 'amqplib';
 export class StoreCreatedListener  extends BaseListener<storeCreatedEvent>{
     OnMessage(msg: Message, channel: Channel): void {
          
+        
         console.log(msg.content.toString()) ;
         channel.ack(msg)
 

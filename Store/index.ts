@@ -42,7 +42,7 @@ const connect =  await mongoose.connect(process.env.MONGO_URI);
         await AmqplibWrapper.client.close();
     })
 
-    await new StoreCreatedListener(AmqplibWrapper.channel).listen()   
+    // await new StoreCreatedListener(AmqplibWrapper.channel).listen()   
 
      app.listen(PORT , ()=>{
         console.log("port opened");
