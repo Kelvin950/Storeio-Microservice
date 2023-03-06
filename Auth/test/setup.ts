@@ -1,30 +1,10 @@
-import {MongoMemoryServer} from 'mongodb-memory-server';
-import  app from '../src/app';
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+beforeAll(async () => {
+  // put your client connection code here, example with mongoose:
+  await mongoose.connect(process.env["MONGO_URI"]);
+});
 
-let mongo:any
-beforeAll(async ()=>{
-       mongo =  new MongoMemoryServer();
-       const mongouri = await mongo.getUri();
-
-       await mongoose.connect(mongouri);
-}) ; 
-
-
-beforeEach(async ()=>{
-
-
-    const coll = await mongoose.connection.db.collections();
-    
-    for(let c of coll){
-        await c.deleteMany({});
-    }
-
-})
-
-
-afterAll(async ()=>{
-      mongo.stop(); 
-
-      mongoose.connection.close();
-})
+afterAll(async () => {
+  // put your client disconnection code here, example with mongodb:
+  await mongoose.disconnect();
+});

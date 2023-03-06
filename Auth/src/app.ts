@@ -4,7 +4,7 @@ import cookie from 'cookie-parser';
 import {errorHandler} from '@kelvin9502/shared'
 import 'dotenv/config' ; 
 import helmet from 'helmet';
-import {userRoutes} from "@route/userRoutes"
+import {userRoutes} from "./routes/userRoutes"
 const app =  express();
 
 app.use(express.json());

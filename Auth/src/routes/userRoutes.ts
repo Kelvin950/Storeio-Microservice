@@ -1,5 +1,5 @@
 import express from 'express';
-import {createUser,isAuth} from '@controller/loginController';
+import {createUser,isAuth} from '../controllers/loginController';
 
 const Route = express.Router() ; 
 

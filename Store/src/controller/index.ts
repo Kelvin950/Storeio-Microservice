@@ -2,7 +2,7 @@ import  {Request , Response} from "express";
 import  {BadInputError, AuthError} from '@kelvin9502/shared' 
 import  {Store} from '@models/Store';
 import {StoreCreatedPublisher} from '@events/publishers/StoreCreatedPublisher' ;
-
+import {AmqplibWrapper} from '../../AMQPwrapper'
 
 export const createStore = async (req:Request , res:Response)=>{
 
@@ -31,7 +31,7 @@ export const createStore = async (req:Request , res:Response)=>{
     await  store.save(); 
        
 
-    // await new StoreCreatedPublisher().Publish(store)
+    await new StoreCreatedPublisher(AmqplibWrapper.channel).Publish(store)
    
     res.status(201).send({
         success:true , data:{

@@ -1,5 +1,5 @@
 import {Request ,Response} from 'express';
-import User from '@models/User';
+import User from '../Models/User';
 import {BadInputError , AuthError , Payload} from "@kelvin9502/shared";
 import jwt from 'jsonwebtoken';
 import  {Publisher} from '../../Publisher';
