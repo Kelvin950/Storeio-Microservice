@@ -16,19 +16,23 @@ console.log("dr");
 
          await AMQP.Connect(process.env.AMQP_URI);
 
-         process.on("SIGINT" , async()=>{
-            await AMQP.client.close()
-         })
-                  process.on("SIGTERM", async () => {
-                    await AMQP.client.close();
-                  });
+      
      
         
 
     const connect = await mongoose.connect(process.env.MONGO_URI);
     console.log(connect.connection.host);
      
-
+   process.on("SIGINT", async () => {
+     await AMQP.client.close();
+        await connect.connection.dropCollection("users"); 
+   });
+   process.on("SIGTERM", async () => {
+     await AMQP.client.close();
+     await connect.connection.dropCollection("users"); 
+     
+   
+   });
     // await new Listener(AMQP.channel).listen();
 
     app.listen(PORT, () => {
