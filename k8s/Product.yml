@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-depl
+spec:
+  selector:
+    matchLabels:
+      app: product
+  
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+      - name: product
+        image: letsgo21/product:latest
+        env: 
+        -  name: MONGO_URI
+           valueFrom:
+            secretKeyRef:
+              name: productmongo
+              key: mongo_uri
+        -  name: JWT_SECRET 
+           valueFrom:
+            secretKeyRef:
+              name: jwt
+              key: jwt_key
+        -  name: AMQP_URI 
+           value: amqp://rabbitmq-service.default:5672
+       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product
+  ports:
+    - port: 3000
+      targetPort: 3000

@@ -24,3 +24,10 @@ spec:
                 name: store-service
                 port: 
                   number: 3000
+          - path: /api/products/?(.*)
+            pathType: Prefix 
+            backend:
+              service:
+                name: product-service
+                port:
+                  number: 3000
