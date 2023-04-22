@@ -70,7 +70,7 @@ const user =  await User.findOne({name}) ;
 if(!user){
   throw new AuthError("name or password incorrect" , 401);
 }
-
+console.log(user)
 const isValid =  await compare(password , user.password) ;
 
 if(!isValid){

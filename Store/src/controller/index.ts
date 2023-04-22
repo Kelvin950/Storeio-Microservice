@@ -75,3 +75,25 @@ export const getStore =  async(req:Request , res:Response)=>{
         }
     })
 }
+
+
+export const fetchuserStore=  async(req:Request ,res:Response)=>{
+
+ 
+    const store= await  Store.findOne({userId:req.user?.id}) ;
+
+    if(!store) {
+        
+        throw new BadInputError("Bad request error", 400) ;
+    }
+
+
+
+    res.send({
+        success:true  ,data:{
+            store
+        }
+    })
+    
+
+}

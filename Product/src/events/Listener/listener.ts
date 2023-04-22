@@ -8,6 +8,7 @@ export class StoreCreatedListener  extends  BaseListener<storeCreatedEvent>{
     async OnMessage(msg: Message, channel: Channel) {
          
               const data:storeCreated =  JSON.parse(msg.content.toString());
+              console.log(data)
         const store=  await new Store({
                      
              _id: data.id ,
@@ -18,6 +19,8 @@ export class StoreCreatedListener  extends  BaseListener<storeCreatedEvent>{
 
 
          await store.save();
+
+         channel.ack(msg) ;
         
      }
     routingKey: RoutingKeys.storeCreated =  RoutingKeys.storeCreated; 

@@ -21,6 +21,8 @@ export class productCreatedListener extends BaseListener<productCreatedEvent>{
              
             ).save()
 
+
+        channel.ack(msg)
     }
 
     routingKey: RoutingKeys.productCreated =  RoutingKeys.productCreated;

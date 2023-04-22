@@ -6,11 +6,10 @@ import { productCreatedPublsiher } from '@events/Publisher/ProductCreatedEvent';
 import { AMQPwrapper } from '../../AMQP';
 
 export const create = async (req:Request , res:Response)=>{
-       
-    const {storeId} = req.params
+   
 
    
-    const store =  await Store.find({userId:req.user?.id}) ; 
+    const store =  await Store.findOne({userId:req.user?.id}) ; 
     if(!store){
     
         throw new  BadInputError("store not available" ,400);
@@ -21,7 +20,7 @@ export const create = async (req:Request , res:Response)=>{
      const  {name ,description , price }  =  req.body ; 
 
       
-     const productAlreadyExist =    await Product.findOne({name  , storeId}) ; 
+     const productAlreadyExist =    await Product.findOne({name  , StoreId: store.id}) ; 
  
 
      console.log(productAlreadyExist)
@@ -32,7 +31,7 @@ export const create = async (req:Request , res:Response)=>{
 
 
     const product = new Product({
-        name , description , price: +price , storeId  
+        name , description , price: +price , storeId:store.id
     })  ;
       
       
@@ -90,6 +89,20 @@ export const getProduct =  async (req:Request ,res:Response)=>{
 
         product
         }
+    })
+
+
+}
+
+
+
+export const getStoreProducts =  async(req:Request ,res:Response)=>{
+
+    const products =  await Product.find({storeId:req.params.storeId})
+  
+
+    res.send({
+        products
     })
 
 

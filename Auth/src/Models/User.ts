@@ -17,14 +17,19 @@ const userSchema = new Schema<User>({
 
 userSchema.pre('save', async function(next){
           
-    const salt =  await genSalt(12);
-      
-    const hashPass =  await hash(this.password , salt);
+ 
+    if(this.isModified("password")){
 
-  this.password =  hashPass ; 
+           const salt = await genSalt(12);
 
+           const hashPass = await hash(this.password, salt);
+
+           this.set("password", hashPass);
+
+    }
 
     
+    next()
 
 })
 
