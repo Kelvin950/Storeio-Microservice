@@ -1,6 +1,6 @@
 import express from 'express';
 import  {isAuth} from '@kelvin9502/shared' ;
-import { createStore, getStore, getStores } from '@controller/index';
+import { createStore, fetchuserStore, getStore, getStores } from '@controller/index';
 const Router = express.Router();
 
 
@@ -10,10 +10,12 @@ Router.route("/create")
 Router.route("/")
 .get(getStores)
 
+Router.route("/fetchuserStore").get(isAuth ,fetchuserStore);
 
 
 Router.route("/:id")
 .get(getStore)
+
 
 
 
