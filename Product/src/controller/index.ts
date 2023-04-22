@@ -10,8 +10,7 @@ export const create = async (req:Request , res:Response)=>{
     const {storeId} = req.params
 
    
-    const store =  await Store.findById(storeId); 
- 
+    const store =  await Store.find({userId:req.user?.id}) ; 
     if(!store){
     
         throw new  BadInputError("store not available" ,400);
@@ -40,8 +39,7 @@ export const create = async (req:Request , res:Response)=>{
 
     await product.save() ; 
  
-    store.products.push(product);
-    await store.save();
+
 
     await new productCreatedPublsiher(AMQPwrapper.Channel!).Publish({
         id:product._id.toString() , 
@@ -61,5 +59,38 @@ export const create = async (req:Request , res:Response)=>{
  
   
  
+
+}
+
+
+export const getProducts=  async(req:Request, res:Response)=>{
+
+
+    const products=  await Product.find() ; 
+
+    res.send({
+        success:true ,data:{
+            products 
+        }
+    })
+}
+
+
+export const getProduct =  async (req:Request ,res:Response)=>{
+
+    const product = await Product.findById(req.params.id) ;
+
+
+    if(!product){
+
+        throw new BadInputError("bad input error" , 400)
+    }
+    res.send({
+        success:true , data:{
+
+        product
+        }
+    })
+
 
 }

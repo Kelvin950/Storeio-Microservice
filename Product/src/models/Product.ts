@@ -9,8 +9,8 @@ const productSchema =  new Schema<Iproducts>({
 name:{type:String , required:true } ,
 description:{type:String ,required:true} ,
 price:{type:Number , required:true}, 
-storeId:{type:Schema.Types.ObjectId , ref:"STORE"}
-
+storeId:{type:Schema.Types.ObjectId , ref:"STORE"} ,
+image:{type:String , require:true}
 
 
 

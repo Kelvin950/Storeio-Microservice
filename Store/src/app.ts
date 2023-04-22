@@ -8,11 +8,8 @@ const app =  express();
 
 app.use(express.json());
 
-app.get("/api/stores/", (req:Request , res:Response)=>{
-    res.send("goo")
-})
 
-app.use(storeRouter);
+app.use("/api/stores" ,storeRouter);
 
 
 

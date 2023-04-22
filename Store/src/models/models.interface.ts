@@ -4,9 +4,16 @@ export interface  Istore{
 
      name:string ; 
      userId:string ; 
-    product:Types.DocumentArray<Types.ObjectId> ; 
-    orders: Types.DocumentArray<Types.ObjectId>; 
+    
       
 
 
+}
+
+export interface Iproducts {
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+  storeId: Types.ObjectId;
 }

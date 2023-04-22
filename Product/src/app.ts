@@ -7,12 +7,10 @@ const app = express() ;
 app.use(express.json());
       
 
-app.get("/api/products/" ,(req:Request,res:Response)=>{
-    res.send("hello world")
-})
 
 
-app.use(productRouter);
+
+app.use("/api/products" , productRouter);
 app.use(errorHandler) ; 
 
 

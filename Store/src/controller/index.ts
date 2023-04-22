@@ -26,7 +26,7 @@ export const createStore = async (req:Request , res:Response)=>{
         name ,
         userId:req.user?.id
     })
-     
+    
     
     await  store.save(); 
        
@@ -42,3 +42,36 @@ export const createStore = async (req:Request , res:Response)=>{
 }
 
 
+
+export const getStores=  async(req:Request , res:Response)=>{
+
+  
+    const stores=  await Store.find() ;
+
+
+    res.send({
+        success:true , data:{
+            stores
+        }
+    })
+
+
+}
+
+
+export const getStore =  async(req:Request , res:Response)=>{
+
+    const store = await Store.findById(req.params.id) ;
+
+    if(!store){
+        
+        throw new BadInputError("Bad request" , 400)
+    }
+
+
+    res.send({
+        sucess:true , data:{
+            store
+        }
+    })
+}

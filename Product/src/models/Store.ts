@@ -6,8 +6,8 @@ const StoreSchema = new Schema<Istore>({
   name: { type: String, required: true, unique: true },
   userId: { type: String, required: true, unique: true },
 
-  products: [{ type: Schema.Types.ObjectId, ref: "PRODUCT" }],
-  orders: [{ type: Schema.Types.ObjectId, ref: "ORDER" }],
+
+  
 } , 
 
 {

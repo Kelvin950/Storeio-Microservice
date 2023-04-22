@@ -16,7 +16,7 @@ app.get("/api/users/" , (req:Request,res:Response)=>{
     res.send("hool")
 })
 
-app.use(userRoutes)
+app.use("/api/users" , userRoutes)
 
 
 app.use(errorHandler);

@@ -18,7 +18,7 @@ export interface  Istore{
  
     name:string;
     userId:string ;
-    products: Types.DocumentArray<Types.ObjectId> ;
-    orders: Types.DocumentArray<Types.ObjectId>
+
+    
   
 }
