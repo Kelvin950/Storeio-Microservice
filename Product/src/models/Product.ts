@@ -1,6 +1,6 @@
 import { Schema , model } from "mongoose";
 import {Iproducts} from  './models.interface'  ; 
-
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 
 const productSchema =  new Schema<Iproducts>({
@@ -25,7 +25,7 @@ image:{type:String , require:true}
     }
 })
 
-
+productSchema.plugin(updateIfCurrentPlugin)
 
 
 export  const Product = model("PRODUCT" , productSchema) ;
