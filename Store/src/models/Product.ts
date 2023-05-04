@@ -1,13 +1,22 @@
-import { Schema, model } from "mongoose";
+import { HydratedDocument, Model, Schema, model } from "mongoose";
 import { Iproducts } from "./models.interface";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
-const productSchema = new Schema<Iproducts>(
+
+
+
+interface productModel extends Model<Iproducts>{
+  
+   findProduct(data:{id:string, version:number}):  Promise<HydratedDocument<Iproducts>>
+
+}
+const productSchema = new Schema<Iproducts , productModel>(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
     price: { type: Number, required: true },
     storeId: { type: Schema.Types.ObjectId, ref: "STORE" },
-    image: { type: String, require: true },
+    image: { type: String},
   },
  
   {
@@ -20,5 +29,19 @@ const productSchema = new Schema<Iproducts>(
     },
   }
 );
+//
 
-export const Product = model("PRODUCT", productSchema);
+productSchema.static(
+  "findProduct",
+  function findProduct(data: { id: string; version: number }) {
+     
+    return  this.findOne({_id:data.id ,version:data.version-1})
+
+  }
+);
+
+//@ts-ignore
+productSchema.plugin(updateIfCurrentfile:///home/kelvin/Desktop/sources/golang/lesson1
+Plugin)
+productSchema.set("versionKey" , "version")
+export const Product = model<Iproducts , productModel>("PRODUCT", productSchema);

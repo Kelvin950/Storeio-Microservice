@@ -16,6 +16,7 @@ export class productCreatedListener extends BaseListener<productCreatedEvent>{
             name:content.name ,
             storeId:content.storeId ,
             price:content.price , 
+            version:content.version ,
             description:content.description
          }
              

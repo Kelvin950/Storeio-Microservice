@@ -1,6 +1,6 @@
 import  express from "express"; 
 import {isAuth} from  '@kelvin9502/shared' ; 
-import  {create, getProduct, getProducts , getStoreProducts} from '@controller/index'
+import  {create, getProduct, getProducts , getStoreProducts, updateProduct} from '@controller/index'
 const Router =  express.Router(); 
  
 
@@ -12,7 +12,8 @@ Router.route("/")
 
 
 Router.route("/:id")
-.get(getProduct) ;
+.get(getProduct) 
+.post(isAuth , updateProduct) 
 
 Router.route("/store/:storeId/products")
 .get(getStoreProducts)

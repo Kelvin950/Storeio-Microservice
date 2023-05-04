@@ -1,9 +1,11 @@
 import {Product} from '@models/Product' ;
 import {Store} from '@models/Store'
 import {Request , Response} from 'express';
-import {BadInputError} from '@kelvin9502/shared';
+import {AuthError, BadInputError} from '@kelvin9502/shared';
 import { productCreatedPublsiher } from '@events/Publisher/ProductCreatedEvent';
 import { AMQPwrapper } from '../../AMQP';
+import { productUpdatedPublisher } from '@events/Publisher/ProductUpdatedEvents';
+import { Istore } from '@models/models.interface';
 
 export const create = async (req:Request , res:Response)=>{
    
@@ -45,6 +47,7 @@ export const create = async (req:Request , res:Response)=>{
         name:product.name ,
         storeId:product.storeId.toString() ,
         price: product.price ,
+        version:product.version ,
         description:product.description
     })
 
@@ -104,6 +107,49 @@ export const getStoreProducts =  async(req:Request ,res:Response)=>{
     res.send({
         products
     })
+
+
+}
+
+export const updateProduct = async(req:Request , res:Response)=>{
+  
+
+    const  {name,description ,price} =  req.body ;
+
+    const product =  await Product.findById(req.params.id).populate<{storeId:Istore}>("storeId") ; 
+
+    if(!product){
+        throw new BadInputError("Bad request error" , 400) ;
+    }
+
+    if(product.storeId.userId !== req.user?.id) {
+        throw new AuthError("not authorized" , 401)
+    }
+
+    product.name =  name ; 
+    product.description = description ;
+    product.price = price ;
+   
+
+    await  product.save() ;
+ 
+   await new productUpdatedPublisher(AMQPwrapper.Channel!).Publish({
+ 
+    id: product._id.toString() , 
+    name: product.name  , 
+    description: product.description ,
+    price:product.price , 
+    storeId:product.storeId.toString() ,
+    version:product.version
+   })
+
+    res.send({
+        success:true , data:{
+            product
+        }
+    })
+     
+
 
 
 }

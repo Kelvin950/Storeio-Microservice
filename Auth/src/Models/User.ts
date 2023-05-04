@@ -14,7 +14,7 @@ const userSchema = new Schema<User>({
         },
     }
 })
-//
+///
 userSchema.pre('save', async function(next){
           
  

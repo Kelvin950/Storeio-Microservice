@@ -8,6 +8,7 @@ export interface Iproducts{
 name:string;
 description:string ;
 price:number ; 
+version:number
 image:string ;
 storeId:Types.ObjectId
 

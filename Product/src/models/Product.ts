@@ -24,8 +24,8 @@ image:{type:String , require:true}
         },
     }
 })
-
-productSchema.plugin(updateIfCurrentPlugin)
+productSchema.set("versionKey" , "version") ;
+productSchema.plugin(updateIfCurrentPlugin) ;
 
 
 export  const Product = model("PRODUCT" , productSchema) ;
@@ -46,7 +46,7 @@ data is fetched at the same time by this two diff users it doesnt affect our db 
 
 however locking the db affects the performance of the db therefore an optimised solution is optimisitc concurrency control
    we either change the version or the timestamp of the db instance whenever the db is updated . with this the second user cannot update the instance since the versio or timestamp would have expired
-   
+
 
 
 
