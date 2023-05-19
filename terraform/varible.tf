@@ -3,6 +3,11 @@ variable "name" {
  default  = "istorekelvin" 
 }
 
+variable "app_version" {
+  
+
+}
+
 variable "location" {
   
  default  = "West US"
