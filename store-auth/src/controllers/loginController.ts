@@ -6,6 +6,7 @@ import  {Publisher} from '../../Publisher';
 
 import {AMQP} from '../../amqplibWrapper'
 import { compare } from 'bcryptjs';
+import { config } from '../../config';
 
 export const isAuth = async(req:Request , res:Response)=>{
 
@@ -22,7 +23,7 @@ export const isAuth = async(req:Request , res:Response)=>{
   let payload:Payload ;
    
 try {
-   payload = jwt.verify(refreshToken, process.env.JWT_SECRET!) as Payload; 
+   payload = jwt.verify(refreshToken, config.JWT_SECRET) as Payload; 
 } catch (error) {
    
   throw new AuthError("You are not authenticated", 403)
@@ -41,7 +42,7 @@ try {
    }
 
  
-   let access_token = jwt.sign({id:user.id ,name:user.name}, process.env.JWT_SECRET!, { expiresIn: "1hr" }); 
+   let access_token = jwt.sign({id:user.id ,name:user.name}, config.JWT_SECRET, { expiresIn: "1hr" }); 
 
   res.status(200).send({success:true , data:{
     access_token
@@ -79,13 +80,13 @@ if(!isValid){
 
  const refreshtoken = jwt.sign(
    { id: user.id, email: user.name },
-   process.env.JWT_SECRET!,
+ config.JWT_SECRET,
    { expiresIn: "7d" }
  );
 
  const accessToken = jwt.sign(
    { id: user.id, email: user.name },
-   process.env.JWT_SECRET!,
+ config.JWT_SECRET,
    { expiresIn: "1hr" }
  );
 
@@ -124,9 +125,9 @@ const user = await  User.create({name , password});
 
  
       
- const refreshtoken =  jwt.sign( {id:user.id , email:user.name}, process.env.JWT_SECRET! ,{expiresIn:"7d"} ); 
+ const refreshtoken =  jwt.sign( {id:user.id , email:user.name}, config.JWT_SECRET ,{expiresIn:"7d"} ); 
 
- const accessToken  = jwt.sign({id:user.id , email:user.name}  , process.env.JWT_SECRET! , {expiresIn:"1hr"});
+ const accessToken  = jwt.sign({id:user.id , email:user.name}  , config.JWT_SECRET , {expiresIn:"1hr"});
 
  res.cookie("refreshToken" , refreshtoken , {
    httpOnly:true ,signed:true 

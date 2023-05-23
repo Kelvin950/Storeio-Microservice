@@ -262,7 +262,7 @@ resource "kubernetes_service" "service" {
         port =3000
         target_port = 3000
       }
-       type ="LoadBalancer"
+    
     }
 
    

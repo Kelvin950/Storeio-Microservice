@@ -5,10 +5,11 @@ import {errorHandler} from '@kelvin9502/shared'
 import 'dotenv/config' ; 
 import helmet from 'helmet';
 import {userRoutes} from "./routes/userRoutes"
+import { config } from '../config';
 const app =  express();
 
 app.use(express.json());
-app.use(cookie("2323")) ; 
+app.use(cookie(config.SECRET)) ; 
 
 
 app.get("/api/users/" , (req:Request,res:Response)=>{

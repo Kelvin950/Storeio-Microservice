@@ -25,3 +25,17 @@ variable "client_id" {
 variable "client_secret" {
   
 }
+
+
+variable "secret" {
+  
+}
+
+variable "MONGO_URI" {
+  
+}
+
+variable "JWT_SECRET" {
+  
+}
+
