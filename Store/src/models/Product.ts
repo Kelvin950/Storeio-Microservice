@@ -41,7 +41,6 @@ productSchema.static(
 );
 
 //@ts-ignore
-productSchema.plugin(updateIfCurrentfile:///home/kelvin/Desktop/sources/golang/lesson1
-Plugin)
+productSchema.plugin(updateIfCurrentPlugin)
 productSchema.set("versionKey" , "version")
 export const Product = model<Iproducts , productModel>("PRODUCT", productSchema);

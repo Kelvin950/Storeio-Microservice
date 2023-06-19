@@ -1,6 +1,6 @@
 import {Schema ,model} from 'mongoose'
 import { Istore } from './models.interface';
-
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 
 const storeSchema = new Schema<Istore>({
   name: { type: String, unique: true, required: true },
@@ -24,7 +24,8 @@ const storeSchema = new Schema<Istore>({
 
 
 
-
+storeSchema.plugin(updateIfCurrentPlugin) ;
+storeSchema.set('versionKey' , 'version') ;
 
 
 

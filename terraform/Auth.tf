@@ -259,7 +259,7 @@ resource "kubernetes_service" "service" {
       session_affinity = "ClientIP"
 
       port {
-        port =3000
+        port = 3000
         target_port = 3000
       }
     

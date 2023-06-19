@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(cookie(config.SECRET)) ; 
 
 
-app.get("/api/users/" , (req:Request,res:Response)=>{
+app.get("/api/users" , (req:Request,res:Response)=>{
 
     res.send("hool")
 })
