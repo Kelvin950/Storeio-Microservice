@@ -2,6 +2,10 @@ import {app} from './src/app' ;
 import  {AMQPWRAPPER } from './AMQP' ;
 import  {Client } from 'cassandra-driver' ;
 import path from 'path';
+import 'dotenv/config';
+import { productCreatedListener } from './src/events/Listener/ProductCreatedlistener';
+import { productUpdatedListener} from './src/events/Listener/ProductUpdatedListener';
+import { StoreCreatedListener } from './src/events/Listener/StoreCreatedListener';
 const PORT=  process.env.PORT || 3000;
 
 
@@ -29,6 +33,13 @@ let client: Client ;
 await AMQPWRAPPER.Connect(process.env.AMQP_URI) ;
 
 
+await  new productCreatedListener(AMQPWRAPPER.channel).listen() ; 
+
+await new productUpdatedListener(AMQPWRAPPER.channel).listen() ;
+
+await  new StoreCreatedListener(AMQPWRAPPER.channel).listen();
+
+
 process.on('SIGINT' , async()=>{
 
     await  AMQPWRAPPER.client.close() ;
@@ -45,16 +56,12 @@ process.on("SIGTERM", async () => {
 
 client = new Client({
   cloud: {
-    secureConnectBundle: path.resolve(
-      __dirname,
-      "secure-connect-workshop.zip"
-    ),
+    secureConnectBundle: path.resolve(__dirname, "secure-connect-workshop.zip"),
   },
-  
 
   credentials: {
     username: process.env.username,
-    password:  process.env.secretid,
+    password: process.env.secretid,
   },
 });
 
@@ -73,7 +80,7 @@ console.log(client.hosts)  ;
     } catch (error) {
         
 
-        throw new Error('connection failed')
+        throw error
     }
 
 })()
