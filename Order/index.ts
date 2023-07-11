@@ -19,7 +19,9 @@ let client: Client ;
 
     try {
         
-       if(!process.env.SECRET) throw new Error('no cookie secret');
+     
+      
+      
  
 
        if(!process.env.JWT_SECRET) throw new Error('no  jwt secret ')
