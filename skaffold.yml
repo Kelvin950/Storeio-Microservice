@@ -32,12 +32,12 @@ build:
         manual:
           - dest: .
             src: 'src/**/*.ts'
-    - image: letsgo21/order
-      context: Order
-      docker:
-        dockerfile: Dockerfile
-      sync:
-        manual:
-          - dest: .
-            src: 'src/**/*.ts'
+    # - image: letsgo21/order
+    #   context: Order
+    #   docker:
+    #     dockerfile: Dockerfile
+    #   sync:
+    #     manual:
+    #       - dest: .
+    #         src: 'src/**/*.ts'
             
