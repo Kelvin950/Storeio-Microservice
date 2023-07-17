@@ -32,14 +32,14 @@ let client: Client ;
         if (!process.env.username) throw new Error("no username");
          if (!process.env.secretid) throw new Error("no cassandra secret");
 
-await AMQPWRAPPER.Connect(process.env.AMQP_URI) ;
+// await AMQPWRAPPER.Connect(process.env.AMQP_URI) ;
 
 
-await  new productCreatedListener(AMQPWRAPPER.channel).listen() ; 
+// await  new productCreatedListener(AMQPWRAPPER.channel).listen() ; 
 
-await new productUpdatedListener(AMQPWRAPPER.channel).listen() ;
+// await new productUpdatedListener(AMQPWRAPPER.channel).listen() ;
 
-await  new StoreCreatedListener(AMQPWRAPPER.channel).listen();
+// await  new StoreCreatedListener(AMQPWRAPPER.channel).listen();
 
 
 process.on('SIGINT' , async()=>{
