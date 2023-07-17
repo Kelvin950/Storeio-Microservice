@@ -27,7 +27,7 @@ console.log("dr");
 
       
      
-        
+        console.log(config.MONGO_URI)
 
     const connect = await mongoose.connect(config.MONGO_URI);
     console.log(connect.connection.host);
