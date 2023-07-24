@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-depl
+spec:
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: letsgo21/order:latest
+        env:
+          - name: AMQP_URI 
+            value: amqp://rabbitmq-service.default:5672
+          - name: JWT_SECRET 
+            valueFrom:
+              secretKeyRef:
+                name: jwt
+                key: jwt_key
+          - name: username
+            valueFrom:
+              secretKeyRef:
+                name: username
+                key: username 
+          - name: secretid 
+            valueFrom:
+              secretKeyRef:
+                name:  secretid
+                key: secretid
+
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+spec:
+  selector:
+    app: order-depl
+    type: LoadBalancer
+  ports:
+  - port: 3000
+    targetPort: 3000
