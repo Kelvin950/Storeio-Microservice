@@ -70,7 +70,9 @@ client = new Client({
 
 await client.connect() ;
 
-       
+        
+
+
 console.log(client.hosts)  ;
 
         app.listen(PORT, ()=>{
@@ -82,7 +84,7 @@ console.log(client.hosts)  ;
     } catch (error) {
         
 
-        throw error
+        console.log(error)
     }
 
 })()
