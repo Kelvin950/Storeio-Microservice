@@ -1,7 +1,7 @@
 import {Client} from 'cassandra-driver'
 export const createStore =async (client:Client)=>{
 try {
-    const operation = `CREATE TABLE IF NOT EXISTS STORE(
+    const operation = `CREATE TABLE IF NOT EXISTS chatsandra.STORE(
         storeid text , 
         name text ,
         userid text ,
@@ -15,7 +15,7 @@ try {
   CREATE UNIQUE INDEX IF NOT EXISTS ON STORE (name);
   CREATE UNIQUE INDEX IF NOT EXISTS ON STORE (storeid);
 `;
-    await client.execute(operation); 
+    await client.execute(operation, [], { prepare: true }); 
     await client.execute(createUniqueNameIndexQuery)
 } catch (error) {
    
@@ -25,7 +25,7 @@ try {
 
 export const createProduct = async (client: Client) => {
   try {
-    const operation = `CREATE TABLE IF NOT EXISTS PRODUCT (
+    const operation = `CREATE TABLE IF NOT EXISTS chatsandra.PRODUCT (
     productid text,
     name text,
     description text,
@@ -36,7 +36,7 @@ export const createProduct = async (client: Client) => {
   ) WITH CLUSTERING ORDER BY (createdAt DESC);
 `;
 
-    await client.execute(operation);
+    await client.execute(operation , [] ,  {prepare:true});
   } catch (error) {
     throw error;
   }

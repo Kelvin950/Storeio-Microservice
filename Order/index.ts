@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { productCreatedListener } from './src/events/Listener/ProductCreatedlistener';
 import { productUpdatedListener} from './src/events/Listener/ProductUpdatedListener';
 import { StoreCreatedListener } from './src/events/Listener/StoreCreatedListener';
+import { createProduct, createStore } from './seed';
 const PORT=  process.env.PORT || 3000;
 
 
@@ -70,7 +71,8 @@ client = new Client({
 
 await client.connect() ;
 
-        
+        createStore(client) ;
+        createProduct(client)
 
 
 console.log(client.hosts)  ;
