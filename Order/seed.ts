@@ -11,12 +11,9 @@ try {
          
     )WITH CLUSTERING ORDER BY(createdAt ASC);`;
 
-    const createUniqueNameIndexQuery = `
-  CREATE UNIQUE INDEX IF NOT EXISTS ON STORE (name);
-  CREATE UNIQUE INDEX IF NOT EXISTS ON STORE (storeid);
-`;
+    
     await client.execute(operation, [], { prepare: true }); 
-    await client.execute(createUniqueNameIndexQuery)
+   
 } catch (error) {
    
     throw error

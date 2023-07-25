@@ -7,8 +7,8 @@ import { productCreatedListener } from './src/events/Listener/ProductCreatedlist
 import { productUpdatedListener} from './src/events/Listener/ProductUpdatedListener';
 import { StoreCreatedListener } from './src/events/Listener/StoreCreatedListener';
 import { createProduct, createStore } from './seed';
+import exp from 'constants';
 const PORT=  process.env.PORT || 3000;
-
 
 let client: Client ;
 
@@ -93,3 +93,4 @@ console.log(client.hosts)  ;
 
 
 
+export {client}

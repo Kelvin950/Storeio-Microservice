@@ -1,6 +1,6 @@
-import {storeCreatedEvent , BaseListener, RoutingKeys } from '@kelvin9502/shared' ;
+import {storeCreatedEvent , BaseListener, RoutingKeys ,  } from '@kelvin9502/shared' ;
 import { Message, Channel } from 'amqplib';
-
+import  {client} from '../../../index'
 
 
 export  class  StoreCreatedListener extends BaseListener<storeCreatedEvent>{
@@ -12,11 +12,22 @@ export  class  StoreCreatedListener extends BaseListener<storeCreatedEvent>{
 
     async OnMessage(msg: Message, channel: Channel){
         
-    const data =  msg.content.toString() ;
+   try {
+     const data = JSON.parse(msg.content.toString());
+console.log(data)
+     const operation = `INSERT INTO chatsandra.STORE(storeid , name , userid, createdAt) VALUES(? , ? , ? ,?)`;
+     const params = [data.id, data.name, data.userId, new Date(data.createdAt)];
 
+     const res = await client.execute(operation, params, { prepare: true });
 
-    console.log(data )
-        channel.ack(msg) ;
+     console.log(res.info ,res.rows[0]);
+  
+     
+     channel.ack(msg);
+   } catch (error) {
+     
+    throw error
+   }
 
     }
 
