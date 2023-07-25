@@ -32,12 +32,50 @@ build:
         manual:
           - dest: .
             src: 'src/**/*.ts'
-    # - image: letsgo21/order
-    #   context: Order
-    #   docker:
-    #     dockerfile: Dockerfile
-    #   sync:
-    #     manual:
-    #       - dest: .
-    #         src: 'src/**/*.ts'
-            
+    - image: letsgo21/order
+      context: Order
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - dest: .
+            src: 'src/**/*.ts'
+
+# apiVersion: skaffold/v2beta21
+# kind: Config
+# metadata:
+#   name: my-app
+# build:
+#   artifacts:
+#     - image: letsgo21/authe
+#       context: store-auth
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - dest: .
+#             src: 'src/**/*.ts'
+#     - image: letsgo21/store
+#       context: Store 
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - dest: .
+#             src: 'src/**/*.ts'
+#     - image: letsgo21/product
+#       context: Product
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - dest: .
+#             src: 'src/**/*.ts'
+#     - image: letsgo21/order
+#       context: Order
+#       docker:
+#         dockerfile: Dockerfile
+#       sync:
+#         manual:
+#           - dest: .
+#             src: 'src/**/*.ts'

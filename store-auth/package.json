@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon  index.ts",
+    "start": "npx wait-port rabbitmq-service.default:5672 && nodemon  index.ts",
     "clean": "del ./build/*",
     "postbuild": "ef-tspm",
     "run": "nodemon ./build/index.js",
@@ -34,7 +34,8 @@
     "module-alias": "^2.2.2",
     "mongoose": "^6.9.0",
     "nodemon": "^2.0.20",
-    "ts-node": "^10.9.1"
+    "ts-node": "^10.9.1",
+    "wait-port": "^1.0.4"
   },
   "_moduleAlisases": {
     "@roots": ".",

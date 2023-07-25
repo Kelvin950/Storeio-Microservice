@@ -11,7 +11,7 @@ price:number ;
 version:number
 image:string ;
 storeId:Types.ObjectId
-
+createdAt:string
 }
 
 

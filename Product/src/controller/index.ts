@@ -39,17 +39,20 @@ export const create = async (req:Request , res:Response)=>{
       
 
     await product.save() ; 
- 
+  
+    
 
 
     await new productCreatedPublsiher(AMQPwrapper.Channel!).Publish({
-        id:product._id.toString() , 
-        name:product.name ,
-        storeId:product.storeId.toString() ,
-        price: product.price ,
-        version:product.version ,
-        description:product.description
-    })
+      id: product._id.toString(),
+      name: product.name,
+      storeId: product.storeId.toString(),
+      price: product.price,
+      version: product.version,
+      description: product.description,
+      //@ts-ignore
+      createdAt: product.createdAt,
+    });
 
     res.status(201).send({
         succes:true ,
