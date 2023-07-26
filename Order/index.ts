@@ -6,7 +6,7 @@ import 'dotenv/config';
 import { productCreatedListener } from './src/events/Listener/ProductCreatedlistener';
 import { productUpdatedListener} from './src/events/Listener/ProductUpdatedListener';
 import { StoreCreatedListener } from './src/events/Listener/StoreCreatedListener';
-import { createProduct, createStore } from './seed';
+import { createOrderbystoreid, createOrderbyuserid, createOrderdetailsbyuserid, createProduct, createStore } from './seed';
 import exp from 'constants';
 const PORT=  process.env.PORT || 3000;
 
@@ -73,7 +73,9 @@ await client.connect() ;
 
         createStore(client) ;
         createProduct(client)
-
+        createOrderbystoreid(client) 
+        createOrderbyuserid(client) 
+        createOrderdetailsbyuserid(client)
 
 console.log(client.hosts)  ;
 
