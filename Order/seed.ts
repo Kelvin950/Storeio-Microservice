@@ -40,12 +40,23 @@ export const createProduct = async (client: Client) => {
 };
 
 
-export const createOrder = async(client: Client) => {
+export const createOrderbyuserid = async(client: Client) => {
   try {
-    const operation = ``;
+    const operation = `CREATE TABLE IF NOT EXISTS chatsandra.ORDER_BY_USERID(
+    userid text 
+    totalAmount int 
+    orderid timeuuid
+
+    )`;
 
     await client.execute(operation);
   } catch (error) {
     throw error;
   }
 };
+
+
+export const createOrderbystoreid =async (client:Client) => {
+   
+
+}
