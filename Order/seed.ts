@@ -45,7 +45,7 @@ export const createOrderbyuserid = async(client: Client) => {
     const operation = `CREATE TABLE IF NOT EXISTS chatsandra.ORDER_BY_USERID(
     userid text  ,
     totalAmount decimal ,
-    orderid timeuuid ,
+    orderid UUID ,
     PRIMARY KEY(userid , orderid)
 
 
@@ -61,9 +61,9 @@ export const createOrderbyuserid = async(client: Client) => {
 export const createOrderdetailsbyuserid =async (client:Client) => {
    try {
      const operation = `CREATE TABLE IF NOT EXISTS chatsandra.ORDERDETAILS_BY_USERID(
-     userid UUID,
+     userid text,
   orderid UUID,
-  productid UUID,
+  productid text,
   storeid text,
   price decimal,
   quantity int,
@@ -84,8 +84,8 @@ export const createOrderbystoreid = async (client: Client) => {
     const operation = `CREATE TABLE IF NOT EXISTS chatsandra.ODER_BY_STORE_ID (
   storeid text,
   orderid UUID,
-  userid UUID,
-  productid UUID,
+  userid text,
+  productid text,
   price decimal,
   quantity int,
   totalamount decimal,

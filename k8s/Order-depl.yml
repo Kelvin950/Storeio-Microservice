@@ -42,8 +42,8 @@ metadata:
   name: order-service
 spec:
   selector:
-    app: order-depl
-    type: LoadBalancer
+    app: order
+  type: LoadBalancer
   ports:
   - port: 3000
     targetPort: 3000
