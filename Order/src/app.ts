@@ -1,4 +1,4 @@
-import express from 'express' ;
+import express  , {Request , Response }from 'express' ;
 import  'express-async-errors' ;
 import  {errorHandler} from '@kelvin9502/shared' ;
 import { orderRoute } from './routes';
@@ -9,8 +9,11 @@ const app =  express() ;
 
 app.use(express.json()) ;
 
+app.get("/api/orders/" , (req:Request , res:Response)=>{
 
-app.use("/api/order/" , orderRoute) ;
+    res.send("hello") ;
+})
+app.use("/api/orders" , orderRoute) ;
 
 
 app.use(errorHandler) ; 
