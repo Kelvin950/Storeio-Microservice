@@ -84,11 +84,13 @@ export const createOrderbystoreid = async (client: Client) => {
     const operation = `CREATE TABLE IF NOT EXISTS chatsandra.ODER_BY_STORE_ID (
   storeid text,
   userid text,
+  orderid uuid,
   productid text,
   price decimal,
+  
   quantity int,
   totalamount decimal,
-  PRIMARY KEY (storeid, userid)
+  PRIMARY KEY (storeid , userid)
     )
     `;
 

@@ -35,12 +35,14 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
  const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(
       storeid,
   userid,
+  orderid,
   productid,
   price,
+  createdAt ,
   quantity,
   totalamount 
- ) VALUES(?,?,?,?,?,?,?)`; 
-const param2 =[product.storeid , orderid.toString() ,req.user?.id , product.id , product.price , product.quantity , orders.totalAmount]
+ ) VALUES(?,?,?,?,?,? ?, ?)`; 
+const param2 =[product.storeid ,req.user?.id , orderid , product.id , product.price , product.quantity , orders.totalAmount]
 
 queries.push({query:query1 , params:param} , {query:query2 , params:param2})
 })
