@@ -9,7 +9,7 @@ const app =  express() ;
 
 app.use(express.json()) ;
 
-app.get("/api/orders/655" , (req:Request , res:Response)=>{
+app.get("/api/orders/" , (req:Request , res:Response)=>{
 
     res.send("hello") ;
 })

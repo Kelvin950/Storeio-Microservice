@@ -13,9 +13,9 @@ const orders =  req.body ;
 let products =  orders.products ;
 console.log(products)
  
-let orderid =  cassandra.types.Uuid.fromString("84121060-c66e-11ea-a82e-f931183227ac");
+let orderid =  cassandra.types.Uuid.random().toString();
 
-console.log(orderid.toString())
+console.log(orderid)
   
 const useridquery = `INSERT INTO chatsandra.ORDER_BY_USERID(userid , totalAmount , orderid )
 VALUES(? ,?,?)`
@@ -53,7 +53,13 @@ const result = await  client.batch(queries , {prepare:true})
 console.log(result) ;
 
 
-res.send("done")
+
+
+
+
+res.send({
+  success:true , message:"Order successfully created"
+})
 // const orderDetail = `I NSERT INTO  chatsandra.ORDERDETAIL_BY_USERID(userid , orderid , productid , storeid , price, quantity )
 // VALUES(?,?,?,?,?,?)`
 
@@ -65,5 +71,34 @@ res.send("done")
  
  
      
+
+}
+
+
+export const getByUser= async(req:Request , res:Response)=>{
+ 
+  
+  const userid =  req.user?.id ;
+ 
+    
+  //search the createorderbyuserid table if user exists 
+  
+  const query =  `SELECT * FROM CHATSANDRA.ORDER_BY_USERID  WHERE userid =?` ;
+  const param = [ userid] ;
+
+
+  const doc =  await  client.execute(query ,param , {prepare:true}) ;
+
+  console.log(doc) ;
+
+
+  
+
+
+
+  res.send({success:true , data:doc.rows})
+
+
+
 
 }
