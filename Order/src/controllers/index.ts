@@ -34,7 +34,6 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
   const param = [req.user?.id, orderid.toString(), product.id , product.storeid , product.price , product.quantity]
  const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(
       storeid,
-  orderid,
   userid,
   productid,
   price,
@@ -99,6 +98,34 @@ export const getByUser= async(req:Request , res:Response)=>{
   res.send({success:true , data:doc.rows})
 
 
+
+
+}
+
+
+export const getProductsByOrderid =async (req:Request ,res:Response)=>{
+
+ const {id} =  req.params ;
+
+
+ const query =  `SELECT * FROM CHATSANDRA.ORDERDETAILS_BY_USERID WHERE  orderid =? AND userid=?` ;
+
+ const param = [id , req.user?.id] ;
+
+
+ const doc=  await client.execute(query , param , {prepare:true}) ;
+ 
+
+
+
+
+console.log(doc) ;
+
+
+
+res.send({
+  success:true , data:  doc.rows
+})
 
 
 }
