@@ -2,7 +2,8 @@ export  interface Store {
  
 orderid:string ;
 quantity: number ;
-totalAmount:number
+totalAmount:number;
+userid:string;
 }
 
 export interface Product {

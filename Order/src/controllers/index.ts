@@ -50,13 +50,15 @@ for (let key in obj){
    const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(storeid ,
   orderid,
   quantity,
+  userid ,
   totalamount 
  ) VALUES(?,?,?)`;
    const param2 = [
     key ,
    obj[key].orderid, 
    obj[key].quantity ,
-   obj[key].totalAmount
+   obj[key].totalAmount ,
+   obj[key].userid
    ];
 
 

@@ -86,7 +86,7 @@ export const createOrderbystoreid = async (client: Client) => {
  
   orderid uuid,
 
-
+userid text,
   
   quantity int,
   totalamount decimal,
