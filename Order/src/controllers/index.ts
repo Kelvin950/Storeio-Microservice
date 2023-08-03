@@ -35,7 +35,20 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
   price,
   quantity)VALUES(? ,? ,? ,? ,? ,?)`;
   const param = [req.user?.id, orderid, product.id , product.storeid , product.price , product.quantity]
- 
+ if(obj[product.storeid]){
+     obj[product.storeid]["quantity"]++ ;
+     obj[product.storeid]["totalAmount"] += product.price
+
+  }
+  else {
+    obj[product.storeid] = {
+      orderid: orderid ,
+      quantity: product.quantity ,
+      totalAmount:product.price ,
+      userid:  req.user?.id!
+    }
+  }
+
   
 queries.push({query:query1 , params:param})  ;
 
@@ -47,18 +60,19 @@ console.log(obj)
 for (let key in obj){
 
 
-   const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(storeid ,
+   const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(storeid,
   orderid,
   quantity,
   userid ,
   totalamount 
- ) VALUES(?,?,?)`;
+ ) VALUES(?,?,?, ?, ?)`;
    const param2 = [
-    key ,
-   obj[key].orderid, 
-   obj[key].quantity ,
-   obj[key].totalAmount ,
-   obj[key].userid
+     key,
+     obj[key].orderid,
+     obj[key].quantity,
+     
+     obj[key].userid,
+     obj[key].totalAmount,
    ];
 
 
@@ -147,5 +161,27 @@ res.send({
   success:true , data:  doc.rows
 })
 
+
+}
+
+
+export const fetchByStoreId=  async (req:Request ,res:Response)=>{
+ 
+
+  const {id} =  req.params ;
+
+ 
+  const query =  `SELECT * FROM  CHATSANDRA.ODER_BY_STORE_ID WHERE storeid =?`
+  const param = [id]   
+
+  const doc=  await  client.execute(query , param , {prepare:true})
+ 
+
+  console.log(doc) ;
+
+
+  res.send({
+    success:true , data:doc.rows
+  })
 
 }
