@@ -5,11 +5,13 @@
  import { randomUUID } from "crypto";
  import uuid from 'uuid'
 import { buffer } from "stream/consumers";
+import { Store } from "../interface.types";
+
 export const createOrder = async(req:Request , res:Response)=>{
    
     
 const orders =  req.body ; 
- 
+ const obj:Record<string , Store> = {}
 let products =  orders.products ;
 console.log(products)
  
@@ -19,7 +21,7 @@ console.log(orderid)
   
 const useridquery = `INSERT INTO chatsandra.ORDER_BY_USERID(userid , totalAmount , orderid )
 VALUES(? ,?,?)`
-const useridparams= [req.user?.id, orders.totalAmount ,orderid.toString()]; 
+const useridparams= [req.user?.id, orders.totalAmount ,orderid]; 
 
 let queries:any =[{query:useridquery , params:useridparams}]  ;
 
@@ -31,7 +33,7 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
   storeid,
   price,
   quantity)VALUES(? ,? ,? ,? ,? ,?)`;
-  const param = [req.user?.id, orderid.toString(), product.id , product.storeid , product.price , product.quantity]
+  const param = [req.user?.id, orderid, product.id , product.storeid , product.price , product.quantity]
  const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(
       storeid,
   userid,
@@ -44,7 +46,19 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
  ) VALUES(?,?,?,?,?,? ?, ?)`; 
 const param2 =[product.storeid ,req.user?.id , orderid , product.id , product.price , product.quantity , orders.totalAmount]
 
-queries.push({query:query1 , params:param} , {query:query2 , params:param2})
+queries.push({query:query1 , params:param} , {query:query2 , params:param2})  ;
+
+  if(obj[product.storeid]){
+     obj[product.storeid][product.quantity]++ ;
+     obj[product.storeid][product.totalAmount] += product.price
+  }
+  else {
+    obj[product.storeid] = {
+      orderid: orderid ,
+      quantity: product.quantity ,
+      totalAmout:product.price
+    }
+  }
 })
  
 console.log(queries)
