@@ -5,14 +5,15 @@
  import { randomUUID } from "crypto";
  import uuid from 'uuid'
 import { buffer } from "stream/consumers";
-import { Store } from "../interface.types";
+import { Product, Store, order } from "../interface.types";
 
 export const createOrder = async(req:Request , res:Response)=>{
    
     
-const orders =  req.body ; 
+const orders:order =  req.body ; 
  const obj:Record<string , Store> = {}
-let products =  orders.products ;
+let products:Product[] =  orders.products ;
+
 console.log(products)
  
 let orderid =  cassandra.types.Uuid.random().toString();
@@ -25,7 +26,7 @@ const useridparams= [req.user?.id, orders.totalAmount ,orderid];
 
 let queries:any =[{query:useridquery , params:useridparams}]  ;
 
-products.forEach((product:any)=>{
+products.forEach((product:Product)=>{
   
 const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
   orderid,
@@ -34,32 +35,33 @@ const query1 = `INSERT INTO chatsandra.ORDERDETAILS_BY_USERID(userid,
   price,
   quantity)VALUES(? ,? ,? ,? ,? ,?)`;
   const param = [req.user?.id, orderid, product.id , product.storeid , product.price , product.quantity]
- const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(
-      storeid,
-  userid,
+ 
+  
+queries.push({query:query1 , params:param})  ;
+
+
+})  
+
+console.log(obj)
+
+for (let key in obj){
+
+
+   const query2 = `INSERT INTO chatsandra.ODER_BY_STORE_ID(storeid ,
   orderid,
-  productid,
-  price,
-  createdAt ,
   quantity,
   totalamount 
- ) VALUES(?,?,?,?,?,? ?, ?)`; 
-const param2 =[product.storeid ,req.user?.id , orderid , product.id , product.price , product.quantity , orders.totalAmount]
+ ) VALUES(?,?,?)`;
+   const param2 = [
+    key ,
+   obj[key].orderid, 
+   obj[key].quantity ,
+   obj[key].totalAmount
+   ];
 
-queries.push({query:query1 , params:param} , {query:query2 , params:param2})  ;
 
-  if(obj[product.storeid]){
-     obj[product.storeid][product.quantity]++ ;
-     obj[product.storeid][product.totalAmount] += product.price
-  }
-  else {
-    obj[product.storeid] = {
-      orderid: orderid ,
-      quantity: product.quantity ,
-      totalAmout:product.price
-    }
-  }
-})
+  queries.push({ query: query2, params: param2 });
+}
  
 console.log(queries)
 const result = await  client.batch(queries , {prepare:true})

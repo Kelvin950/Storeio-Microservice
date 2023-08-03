@@ -2,14 +2,21 @@ export  interface Store {
  
 orderid:string ;
 quantity: number ;
-totalAmout:number
+totalAmount:number
 }
 
 export interface Product {
 storeid:string ; 
 id:string ;
-price:string ;
-quantity:string ; 
+price:number;
+quantity:number ; 
 
 
+}
+
+
+export interface order {
+
+    totalAmount:number ;
+    products:Product[]
 }
