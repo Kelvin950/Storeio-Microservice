@@ -6,6 +6,7 @@
  import uuid from 'uuid'
 import { buffer } from "stream/consumers";
 import { Product, Store, order } from "../interface.types";
+import { AuthError } from "@kelvin9502/shared";
 
 export const createOrder = async(req:Request , res:Response)=>{
    
@@ -170,6 +171,16 @@ export const fetchByStoreId=  async (req:Request ,res:Response)=>{
 
   const {id} =  req.params ;
 
+  const quer =  `SELECT * FROM CHATSANDRA.STORE WHERE storeid=?` 
+
+  const document=  await  client.execute(quer, [id] , {prepare:true}) 
+
+     
+  if(document.rows[0].get("userid") !== req.user?.id){
+
+       throw new  AuthError("forbidden" , 403)
+
+  }
  
   const query =  `SELECT * FROM  CHATSANDRA.ODER_BY_STORE_ID WHERE storeid =?`
   const param = [id]   

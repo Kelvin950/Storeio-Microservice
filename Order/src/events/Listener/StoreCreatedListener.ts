@@ -20,7 +20,7 @@ console.log(data)
 
      const res = await client.execute(operation, params, { prepare: true });
 
-     console.log(res.info ,res.rows[0]);
+     console.log(res.info ,res);
   
      
      channel.ack(msg);
