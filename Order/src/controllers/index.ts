@@ -175,6 +175,7 @@ export const fetchByStoreId=  async (req:Request ,res:Response)=>{
 
   const document=  await  client.execute(quer, [id] , {prepare:true}) 
 
+  console.log(document)
      
   if(document.rows[0].get("userid") !== req.user?.id){
 
