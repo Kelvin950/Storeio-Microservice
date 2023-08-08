@@ -4,7 +4,7 @@ resource "azurerm_kubernetes_cluster" "cluster" {
    location = var.location
    resource_group_name = azurerm_resource_group.istoreresoucegroup.name
    dns_prefix = var.name
-   kubernetes_version = "1.26.3"
+   kubernetes_version = "1.27.3"
 
    linux_profile {
     admin_username = var.admin_username
