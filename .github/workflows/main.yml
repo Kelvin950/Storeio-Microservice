@@ -24,16 +24,16 @@ jobs:
               terraform apply -auto-approve -var JWT_SECRET="${{secrets.TF_JWT_SECRET}}" 
               -var MONGO_URI="${{secrets.TF_MONGO_URI}}"
               -var secret= "${{secrets.TF.SECRET}}"
-              -var app_version= "${{secret.TF_APP_VERSION}}"
-              -var client_id = "${{secret.TF_CLIENT_ID}}"
-              -var client_secret = "${{secret.TF_CLIENT_SECRET}}"
+              -var app_version= "${{secrets.TF_APP_VERSION}}"
+              -var client_id = "${{secrets.TF_CLIENT_ID}}"
+              -var client_secret = "${{secrets.TF_CLIENT_SECRET}}"
       - name: Terraform Apply
         run: |
               echo "**terraform DESTROY"
               terraform apply -auto-approve -var JWT_SECRET="${{secrets.TF_JWT_SECRET}}" 
               -var MONGO_URI="${{secrets.TF_MONGO_URI}}"
               -var secret= "${{secrets.TF.SECRET}}"
-              -var app_version= "${{secret.TF_APP_VERSION}}"
-              -var client_id = "${{secret.TF_CLIENT_ID}}"
-              -var client_secret = "${{secret.TF_CLIENT_SECRET}}"
+              -var app_version= "${{secrets.TF_APP_VERSION}}"
+              -var client_id = "${{secrets.TF_CLIENT_ID}}"
+              -var client_secret = "${{secrets.TF_CLIENT_SECRET}}"
         
