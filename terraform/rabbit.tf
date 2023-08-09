@@ -42,7 +42,7 @@ resource "kubernetes_deployment" "rabbit" {
 resource "kubernetes_service" "rabbit" {
   
   metadata {
-    name = "rabbit"
+    name = "rabbitmq-service"
 
     
   }
