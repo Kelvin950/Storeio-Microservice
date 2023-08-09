@@ -1,0 +1,39 @@
+name: Terraform workflow
+
+on:
+  push:
+    branches:
+      - main
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout-code
+        uses: actions/checkout@v2
+        
+      - name: Set up terraform
+        uses: hashicorp/terraform@v2
+        
+      - name: Terraform init
+        run: | 
+            echo "*** terrform init"
+            terraform init
+      - name: Terraform Apply
+        run: |
+              echo "**terraform aprove"
+              terraform apply -auto-approve -var JWT_SECRET="${{secrets.TF_JWT_SECRET}}" 
+              -var MONGO_URI="${{secrets.TF_MONGO_URI}}"
+              -var secret= "${{secrets.TF.SECRET}}"
+              -var app_version= "${{secret.TF_APP_VERSION}}"
+              -var client_id = "${{secret.TF_CLIENT_ID}}"
+              -var client_secret = "${{secret.TF_CLIENT_SECRET}}"
+      - name: Terraform Apply
+        run: |
+              echo "**terraform DESTROY"
+              terraform apply -auto-approve -var JWT_SECRET="${{secrets.TF_JWT_SECRET}}" 
+              -var MONGO_URI="${{secrets.TF_MONGO_URI}}"
+              -var secret= "${{secrets.TF.SECRET}}"
+              -var app_version= "${{secret.TF_APP_VERSION}}"
+              -var client_id = "${{secret.TF_CLIENT_ID}}"
+              -var client_secret = "${{secret.TF_CLIENT_SECRET}}"
+        
