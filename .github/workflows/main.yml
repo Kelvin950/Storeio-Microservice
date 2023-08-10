@@ -27,7 +27,7 @@ jobs:
               -var app_version= "${{secrets.TF_APP_VERSION}}"
               -var client_id = "${{secrets.TF_CLIENT_ID}}"
               -var client_secret = "${{secrets.TF_CLIENT_SECRET}}"
-        working-directory: ../../terraform
+        working-directory: ./terraform
       - name: Terraform Apply
         run: |
               echo "**terraform DESTROY"
@@ -37,4 +37,4 @@ jobs:
               -var app_version= "${{secrets.TF_APP_VERSION}}"
               -var client_id = "${{secrets.TF_CLIENT_ID}}"
               -var client_secret = "${{secrets.TF_CLIENT_SECRET}}"
-        working-directory: ../../terraform
+        working-directory: ./terraform
