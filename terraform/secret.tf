@@ -13,3 +13,11 @@ resource "kubernetes_secret" "mysecret" {
 }
   
 }
+
+
+        
+      
+      
+    
+    
+
