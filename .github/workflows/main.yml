@@ -14,13 +14,13 @@ jobs:
       - name: Set up terraform
         uses:  hashicorp/setup-terraform@v2.0.2
         
-      - name: Terraform init
-        run: | 
-            echo "*** terrform init"
-            terraform init
+
       - name: Terraform Apply
         run: |
-              echo "**terraform aprove"
+              echo "**terraform init"
+              terraform init 
+               
+               echo "** terraform apply"
               terraform apply -auto-approve -var JWT_SECRET="${{secrets.TF_JWT_SECRET}}" 
               -var MONGO_URI="${{secrets.TF_MONGO_URI}}"
               -var secret= "${{secrets.TF.SECRET}}"
