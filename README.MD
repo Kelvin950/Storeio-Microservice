@@ -29,6 +29,9 @@
 |   [Stores](./Store)      |  TypeScript, MongoDB               | creates a store by an authorized user |
 |  [orders](./orders)    | TypeScript, CassandraDB          |  Allows users to make orders for a product   |
 
+### INFRASTRUCTURE 
+|  [terraform](./terraform)    | hashicorp terraform          |   used it to create cloud infrastructure on Microsoft Azure   |
+
 
 
 
@@ -40,15 +43,15 @@
 ### Back-end
 - [Node.js](https://nodejs.org/en/) - Runtime environment for JS
 - [Express.js](https://expressjs.com/) - Node.js framework, makes process of building APIs easier & faster
-- [CassandraDB](https://www.mysql.com/) -  An open-source relational database management system
-- [TypeScript]
-- [RabbitMQ]
-- [MongoDB]
+- [CassandraDB](https://cassandra.apache.org/) -  An open-source NOSQL database management system
+- [TypeScript] () - A superSet of javascript  that introduces types.
+- [RabbitMQ] (https://rabbitmq.com) -  An open-source message broker software
+- [MongoDB] (https://mongodb.com) - A NOSQL database management system
 - [Docker](https://www.docker.com/) - A platform for developing, shipping and running applications
 - [Kubernetes](https://kubernetes.io/) -  An open-source system for automating deployment, scaling, and management of containerized applications
 - [Ingress NGINX](https://kubernetes.github.io/ingress-nginx/) - NGINX Ingress Controller for Kubernetes
 - [Skaffold](https://skaffold.dev/) - Handles the workflow for building, pushing and deploying applications
-- [Terraform]
+- [Terraform] (https://www.terraform.io) - An infrastructure as code software 
 - [Jest](https://jestjs.io/) - A JavaScript testing framework
 
 
@@ -56,5 +59,6 @@
 
 ## 📙 About this Project
 
-This is my first project on microservices. I followed[Stephen Griders course on Microservices](https://www.udemy.com/course/microservices-with-node-js-and-react/).
-However I am yet to add more functionalities of my own to it and I cannot wait to create more microservices projects.
+Continuing on my journey to expand my expertise in microservices architecture, I've successfully developed and orchestrated four distinct services, each addressing specific functionalities. This implementation has underscored my commitment to embracing the polyglot persistence approach, which led me to connect these services with two diverse NoSQL databases, MongoDB and Cassandra. By adopting this approach, I've ensured that each service is paired with the database technology that optimally complements its requirements.
+
+My pursuit of knowledge in microservices also extends to Infrastructure. Employing Terraform, I skillfully orchestrated the creation of a Kubernetes cluster within the Azure cloud environment. This endeavor showcased my proficiency in infrastructure as code and validated my ability to seamlessly bridge the gap between development and operations. This accomplishment also exemplifies my readiness to harness the power of cloud computing and modern deployment practices to bolster the scalability and reliability of my microservices architecture.
