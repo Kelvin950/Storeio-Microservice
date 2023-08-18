@@ -1,4 +1,4 @@
-<h1 align="center">A Full Stack Auction Website</h1>
+<h1 align="center">Ecommerce MICROSERVICE</h1>
 
 
 ## 📝 Table of contents
