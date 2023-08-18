@@ -30,7 +30,9 @@
 |  [orders](./orders)    | TypeScript, CassandraDB          |  Allows users to make orders for a product   |
 
 ### INFRASTRUCTURE 
-|  [terraform](./terraform)    | hashicorp terraform          |   used it to create cloud infrastructure on Microsoft Azure   |
+| Service                             | Technologies               | Description             |
+| ----------------------------------- | -------------------------- | ----------------------- |
+|[terraform](./terraform)    | hashicorp terraform          |   used it to create cloud infrastructure on Microsoft Azure   |
 
 
 
@@ -44,14 +46,14 @@
 - [Node.js](https://nodejs.org/en/) - Runtime environment for JS
 - [Express.js](https://expressjs.com/) - Node.js framework, makes process of building APIs easier & faster
 - [CassandraDB](https://cassandra.apache.org/) -  An open-source NOSQL database management system
-- [TypeScript] () - A superSet of javascript  that introduces types.
-- [RabbitMQ] (https://rabbitmq.com) -  An open-source message broker software
-- [MongoDB] (https://mongodb.com) - A NOSQL database management system
+- [TypeScript]() - A superSet of javascript  that introduces types.
+- [RabbitMQ](https://rabbitmq.com) -  An open-source message broker software
+- [MongoDB](https://mongodb.com) - A NOSQL database management system
 - [Docker](https://www.docker.com/) - A platform for developing, shipping and running applications
 - [Kubernetes](https://kubernetes.io/) -  An open-source system for automating deployment, scaling, and management of containerized applications
 - [Ingress NGINX](https://kubernetes.github.io/ingress-nginx/) - NGINX Ingress Controller for Kubernetes
 - [Skaffold](https://skaffold.dev/) - Handles the workflow for building, pushing and deploying applications
-- [Terraform] (https://www.terraform.io) - An infrastructure as code software 
+- [Terraform](https://www.terraform.io) - An infrastructure as code software 
 - [Jest](https://jestjs.io/) - A JavaScript testing framework
 
 
